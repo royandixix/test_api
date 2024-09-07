@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 body {
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    background-color: #f2f2f2; /* Atur warna latar belakang body jika perlu */
+    background-color: #f2f2f2; /* Background color for body */
+    margin: 0; /* Ensure there's no default margin */
+    padding: 0; /* Ensure there's no default padding */
 }
 
 * {
     box-sizing: border-box;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 input[type="text"],
@@ -24,8 +25,8 @@ textarea {
 }
 
 .label {
-    padding: 12px 12px 12px 0;
     display: inline-block;
+    padding: 12px 12px 12px 0;
 }
 
 input[type="submit"],
@@ -36,9 +37,9 @@ input[type="button"] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    float: left;
-    background-color: #04aa6d; /* Default color for buttons */
-    color: white; /* Text color for buttons */
+    background-color: #04aa6d; /* Default button color */
+    color: white;
+    font-size: 16px; /* Ensures font size consistency */
 }
 
 input[type="submit"].primary,
@@ -89,6 +90,7 @@ button.danger:hover {
 .center {
     display: flex;
     justify-content: center;
+    align-items: center; /* Center vertically if needed */
 }
 
 @media screen and (max-width: 768px) {
@@ -105,35 +107,42 @@ button.danger:hover {
 
 .container {
     border-radius: 5px;
-    background-color: #ffffff; /* Warna latar belakang kontainer */
+    background-color: #ffffff; /* Background color for container */
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
 }
 
 .btn {
     margin: 5px;
-    padding: 5px;
-    outline: none;
+    padding: 10px; /* Increase padding for better button size */
     border: 1px solid #ccc;
+    background-color: #04aa6d; /* Default button color */
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 header {
     text-align: center;
-    background-color: #ffffff; /* Warna latar belakang header */
+    background-color: #ffffff; /* Background color for header */
+    padding: 20px 0; /* Add padding for better spacing */
 }
 
 .row-home {
     display: flex;
     height: 100vh;
+    overflow: hidden; /* Prevent scrolling overflow */
 }
 
 .left {
     width: 255px;
-    padding: 15px 10px;
+    padding: 15px;
     background-color: #90aa99;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for separation */
 }
 
 .right {
-    flex: auto;
+    flex: 1;
     padding: 25px;
     background-color: #c7d1c8;
 }
@@ -154,7 +163,7 @@ header {
 
 #myMenu {
     list-style-type: none;
-    padding: 3px;
+    padding: 0;
     margin: 0;
     border-radius: 5px;
 }

@@ -10,6 +10,7 @@ class Routes
 
         // Definisikan rute
         $router->get('/barang', ['BarangController', 'index']);
+        $router->get('/barang/index',['BarangController','index']);
         $router->get('/barang/insert', ['BarangController', 'insert']);
         $router->get('/barang/edit', ['BarangController', 'edit']);
         $router->post('/barang/insert_barang', ['BarangController', 'insert_barang']);

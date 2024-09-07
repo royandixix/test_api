@@ -10,6 +10,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <h1>hello form view Kategori</h1>
+    <h1>hello form view Kategori </h1>
 </body>
 </html>

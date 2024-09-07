@@ -1,6 +1,7 @@
 <?php
     
     if(!session_id()) session_start();
+    
     require_once '../src/config/default.php ';
     require_once '../src/core/App.php';
     require_once '../src/core/Routes.php';

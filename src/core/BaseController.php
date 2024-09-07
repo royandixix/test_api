@@ -1,26 +1,36 @@
 <?php
 class BaseController
 {
-    // Method untuk memuat tampilan (view) dengan data yang diekstraksi
     public function view($view, $data = [])
     {
         if (count($data)) {
-            extract($data); // Menjadikan array asosiatif sebagai variabel
+            extract($data);
         }
-        require_once '../src/views/' . $view . '.php'; // Memuat file view
+        require_once '../src/views/' . $view . '.php';
     }
 
-    // Method untuk melakukan redirect ke URL tertentu
     public function redirect($url)
     {
-        header('Location: ' . $url);
+        header('location: ' . $url);
         exit;
     }
 
-    // Method untuk memuat model dan mengembalikan instance dari model tersebut
     public function model($model)
     {
-        require_once '../src/models/' . $model . '.php'; // Memuat file model
-        return new $model; // Mengembalikan instance dari model
+        require_once '../src/model/' . $model . '.php';
+        return new $model;
+    }
+}
+
+class Controller
+{
+    // Memuat tampilan dengan data
+    protected function view($view, $data = [])
+    {
+        // Mengubah array data menjadi variabel lokal
+        extract($data);
+
+        // Memuat file tampilan
+        require_once __DIR__ . '/../views/' . $view . '.php';
     }
 }
