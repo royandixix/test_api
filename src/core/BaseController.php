@@ -1,36 +1,22 @@
 <?php
-class BaseController
-{
-    public function view($view, $data = [])
-    {
+class BaseController {
+    public function view($view, $data = []) {
         if (count($data)) {
             extract($data);
         }
-        require_once '../src/views/' . $view . '.php';
+        // Gunakan __DIR__ dan sesuaikan path menuju views
+        require_once __DIR__ . '/../views/' . $view . '.php';
     }
 
-    public function redirect($url)
-    {
-        header('location: ' . $url);
+    public function redirect($url) {
+        header('Location: ' . $url);
         exit;
     }
 
-    public function model($model)
-    {
-        require_once '../src/model/' . $model . '.php';
+    public function model($model) {
+        require_once __DIR__ . '/../models/' . $model . '.php';
         return new $model;
     }
 }
 
-class Controller
-{
-    // Memuat tampilan dengan data
-    protected function view($view, $data = [])
-    {
-        // Mengubah array data menjadi variabel lokal
-        extract($data);
-
-        // Memuat file tampilan
-        require_once __DIR__ . '/../views/' . $view . '.php';
-    }
-}
+?>

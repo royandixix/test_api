@@ -1,8 +1,8 @@
-body {
+/* body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-* {
+*{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -11,7 +11,7 @@ body {
 input[type="text"],
 input[type="number"],
 input[type="date"],
-textarea {
+textarea{
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -19,7 +19,7 @@ textarea {
     resize: vertical;
 }
 
-label {
+label{
     padding: 12px 12px 12px 0;
     display: inline-block;
 }
@@ -27,7 +27,7 @@ label {
 input[type="submit"],
 button[type="button"],
 button[type="submit"],
-input[type="button"] {
+input[type="button"]{
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
@@ -35,31 +35,31 @@ input[type="button"] {
     float: left;
 }
 
-.primary {
+.primay {
     background-color: #04aa6d;
     color: white;
 }
 
-.primary:hover {
+.primay:hover {
     background-color: #45a049;
 }
 
 .danger {
-    background-color: #f44336;
-    color: white; 
+   background-color: #f44336;
+   color: white; 
 }
 
-.danger:hover {
+.danger:hover{
     background-color: #d4b1b1;
 }
 
-.col-25 {
+.col-25{
     float: left;
     width: 25%;
     margin-top: 6px;
 }
 
-.col-50 {
+.col-50{
     float: left;
     width: 50%;
     margin-top: 6px;
@@ -92,21 +92,10 @@ input[type="button"] {
         width: 100%;
         margin-top: 0;
     }
-
-    .row-home {
-        flex-direction: column;
-    }
-
-    .left {
-        width: 100%;
-    }
-
-    .right {
-        flex: none;
-    }
 }
 
-.container {
+.container{
+    border-radius: 5px;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
@@ -144,31 +133,4 @@ input[type="button"] {
     flex: auto;
     padding: 25px;
     background-color: #c7d1c8;
-}
-
-#mySearch {
-    width: 100%;
-    font-size: 15px;
-    padding: 10px;
-    border: 1px solid #d6d1d1;
-    border-radius: 7px;
-}
-
-#myMenu {
-    list-style-type: none;
-    padding: 3px;
-    margin: 0;
-    border-radius: 5px;
-}
-
-#myMenu li a {
-    padding: 10px;
-    text-decoration: none;
-    color: black;
-    display: block;
-}
-
-#myMenu li a:hover {
-    background-color: #c7d1c8;
-    border-radius: 7px;
-}
+} */

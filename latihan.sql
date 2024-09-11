@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2024 at 05:22 PM
+-- Generation Time: Sep 11, 2024 at 08:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `barang` (
-  `id_barang` int(11) NOT NULL,
+  `barang_id` int(11) NOT NULL,
   `nama_barang` varchar(225) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `jumlah` int(11) NOT NULL DEFAULT 0,
   `harga_satuan` decimal(15,0) NOT NULL DEFAULT 0,
-  `expire_date` date DEFAULT NULL,
+  `kadaluarsa` date DEFAULT NULL,
   `tanggal_dibuat` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -40,10 +40,8 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `nama_barang`, `jumlah`, `harga_satuan`, `expire_date`, `tanggal_dibuat`) VALUES
-(1, 'Keyboard', 50, 350000, '2025-12-31', '2024-09-06'),
-(2, 'Mouse', 100, 150000, '2025-06-15', '2024-09-06'),
-(3, 'Monitor LED 24 inch', 30, 2000000, '2026-01-01', '2024-09-06');
+INSERT INTO `barang` (`barang_id`, `nama_barang`, `jumlah`, `harga_satuan`, `kadaluarsa`, `tanggal_dibuat`) VALUES
+(31, 'hardisk', 1, 11000, '2024-09-07', NULL);
 
 --
 -- Indexes for dumped tables
@@ -53,7 +51,7 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `jumlah`, `harga_satuan`, `exp
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
-  ADD PRIMARY KEY (`id_barang`) USING BTREE;
+  ADD PRIMARY KEY (`barang_id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -63,7 +61,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `barang_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

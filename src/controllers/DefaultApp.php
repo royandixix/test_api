@@ -1,12 +1,15 @@
 <?php
-
-class DefaultApp extends BaseController{
+class DefaultApp extends BaseController {
     public function index() {
         $data = [
-            'title' => 'Home',
+            "title"=> "Home",
         ];
         $this->view("template/header", $data);
-        $this->view("home/index", $data);
-        $this->view("template/footer");
+        $this->view('home/index', $data);
+        $this->view('template/footer');
     }
 }
+    
+
+
+?>

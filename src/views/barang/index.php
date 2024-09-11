@@ -4,19 +4,18 @@
     </div>
     <div class="row">
         <div>
-            <button onclick="location.href='<?php echo BASEURL . '/barang/insert'; ?>'" type="button" class="btn btn-primary">
-                <i class="fas fa-plus"></i>&nbsp;Tambah
+            <button onclick="location.href='<?php echo BASEURL . '/barang/insert'?>'" type="button" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Tambah
             </button>
-
         </div>
-        <table id="example" class="table table-striped">
-            <thead class="thead-dark">
+        <table id="example" class="stripe" style="width:100%">
+            <thead>
                 <tr>
                     <th>No</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
                     <th>Harga Satuan</th>
-                    <th>Kadaluarsa</th>
+                    <th>Kadaluwarsa</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -26,15 +25,13 @@
                 foreach ($AllBarang as $row) :
                 ?>
                     <tr>
-                        <!-- <td><?php echo $no++; ?></td> -->
-
+                        <td><?php echo $no++; ?></td>
                         <td><?php echo $row['nama_barang'] ?></td>
                         <td><?php echo $row['jumlah'] ?></td>
                         <td><?php echo $row['harga_satuan'] ?></td>
                         <td><?php echo $row['expire_date'] ?></td>
-                        <td><?php echo $row['tanggal_dibuat'] ?></td>
                         <td>
-                            <a href="Edit"><i class="fas fa-edit"></i>&nbsp;Edit</a>
+                            <a href="#"><i class="fas fa-edit"></i> Edit</a>
                         </td>
                     </tr>
                 <?php endforeach ?>
