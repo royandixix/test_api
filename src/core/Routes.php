@@ -12,8 +12,8 @@ class Routes {
         $router->get('barang/index', ['BarangController', 'index']);
         $router->get('barang/insert', ['BarangController', 'insert']);
         $router->get('barang/edit', ['BarangController', 'edit']);
-        $router->get('barang/insert_barang', ['BarangController', 'insert_barang']);
-        $router->get('barang/edit_barang', ['BarangController', 'edit_barang2']);
+        $router->post('barang/insert_barang', ['BarangController', 'insert_barang']);
+        $router->post('barang/edit_barang', ['BarangController', 'edit_barang2']);
 
         // Definisikan rute GET untuk 'kategori'
         $router->get('/kategori', ['KategoriController', 'index']);

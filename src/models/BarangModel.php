@@ -8,5 +8,9 @@ class BarangModel extends Database {
         $query = "SELECT * FROM barang";
         return $this->qry($query)->fetchAll();
     }
+
+    public function insert_barang(){
+        var_dump($_POST );
+    }
 }
 ?>

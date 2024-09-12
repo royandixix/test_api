@@ -14,4 +14,5 @@ define('DB_PASS', $properties['db_pass']);
 define('DB_NAME', $properties['db_name']);
 define('DB_PORT', $properties['db_port']);
 
+
 ?>
