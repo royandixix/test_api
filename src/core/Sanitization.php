@@ -11,7 +11,7 @@ class Sanitization
         'email' => FILTER_SANITIZE_EMAIL,
         'int' => [
             'filter' => FILTER_SANITIZE_NUMBER_INT,
-            'flags' => FILTER_REQUIRE_ARRAY
+            'flags' => FILTER_REQUIRE_SCALAR
         ],
         'int[]' => [
             'filter' => FILTER_SANITIZE_NUMBER_INT,
@@ -23,7 +23,7 @@ class Sanitization
         ],
         'float[]' => [
             'filter' => FILTER_SANITIZE_NUMBER_FLOAT,
-            'flags' => FILTER_FLAG_ALLOW_FRACTION | FILTER_REQUIRE_ARRAY
+            'flags' => FILTER_REQUIRE_ARRAY
         ],
         'url' => FILTER_SANITIZE_URL,
     ];

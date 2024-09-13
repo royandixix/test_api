@@ -1,7 +1,6 @@
 <?php
 class BarangController extends BaseController
 {
-
     private $barangModel;
 
     public function __construct()
@@ -31,39 +30,49 @@ class BarangController extends BaseController
     }
 
     public function insert_barang()
-{
-    $fields = [
-        'nama_barang' => 'required|string|alphanumeric', // Fixed rule name
-        'jumlah' => 'required|integer',
-        'harga_satuan' => 'required|numeric',
-        'kadaluarsa' => 'nullable|string',  // Assuming kadaluarsa is optional
-    ];
+    {
+        $fields = [
+            'nama_barang' => 'string|required|alphanumeric',
+            'jumlah' => 'int|required',
+            'harga_satuan' => 'float|required',
+            'kadaluarsa' => 'date'
+        ];
 
-    $message = [
-        'nama_barang' => [
-            'required' => 'Nama Barang harus diisi!',
-            'alphanumeric' => 'Masukan huruf dan angka', // Corrected rule name
-            'between' => 'Nama Barang harus di antara 3 dan 25 karakter',
-        ],
-        'jumlah' => [
-            'required' => 'Jumlah harus diisi',
-        ],
-        'harga_satuan' => [
-            'required' => 'Harga Satuan harus diisi!',
-        ],
-    ];
+        $message = [
+            'nama_barang' => [
+                'required' => 'Nama Barang harus diisi!',
+                'alphanumeric' => 'Nama Barang harus berisi huruf dan angka',
+                'between' => 'Nama Barang harus di antara 3 dan 25 karakter',
+            ],
 
-    [$inputs, $errors] = $this->filter($_POST, $fields, $message);
 
-    echo '<pre>';
-    var_dump($inputs);
-    echo '</pre>';
+            'harga_satuan' => [
+                'required' => 'Harga Satuan harus diisi!',
+                // 'numeric' => 'Harga Satuan harus berupa angka',
+            ],
 
-    if (!empty($errors)) {
-        echo '<pre>';
-        var_dump($errors);
-        echo '</pre>';
+            'jumlah' => [
+                'integer' => 'Jumlah harus diisi!',
+                // 'integer' => 'Jumlah harus berupa angka',
+            ],
+        ];
+
+        [$inputs, $errors] = $this->filter($_POST, $fields, $message);
+
+        if ($errors) {
+            $errorMessages = implode(' ', $errors);
+            Message::setFlash('error', 'Gagal!', $errorMessages, $inputs);
+            $this->redirect('barang/insert');
+        }
+
+        if($inputs['kadaluarsa'] == ""){
+            $inputs['kadaluarsa'] = "0000-00-00";
+        }
+
+        $proc = $this->barangModel->insert($inputs);
+        if ($proc) {
+            Message::setFlash('succsess', 'Berhasil !', 'Barang berhasil di tambahkan,');
+            $this->redirect('barang');
+        }  
     }
-}
-
 }

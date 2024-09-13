@@ -9,12 +9,14 @@ class BaseController extends Filter {
     }
 
     public function redirect($url) {
-        header('Location: ' . $url);
+        // header('Location: ' . BASEURL . '/' .$url);
+        header('location: ' .BASEURL  . '/' . $url);
         exit;
     }
 
     public function model($model) {
         require_once __DIR__ . '/../models/' . $model . '.php';
+       
         return new $model;
     }
 }
