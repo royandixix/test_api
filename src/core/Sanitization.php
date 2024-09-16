@@ -61,5 +61,5 @@ class Sanitization
             $data = filter_var_array($inputs, $default_filter);
         }
         return $trim ? $this->array_trim($data) : $data;
-    }
+    } 
 }

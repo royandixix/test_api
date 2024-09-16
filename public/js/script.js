@@ -17,3 +17,29 @@ function myFunction (){
 
 let search = document.getElementById("mySearch");
 search.addEventListener("keyup", myFunction);   
+
+
+function edit(mode) {
+    if(mode == "update") {
+        document.getElementById("mode").value = "update"
+        document.getElementById("form").submit();
+
+    }else {
+        Swal.fire({
+            icon: "warning",
+            title: "Konfirmasi",
+            text: "Yakin akan dihapus?",
+            showCancelButton: true,
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            reverseButtons: true,
+        }).then((result) => {
+            if(result.is.Confirmed) {
+                document.getElementById("mode").value = "delete";
+                document.getElementById("form").submit();
+            }else if (result.dismiss === Swal.DismissReason.cancel) {
+                return false;
+            }
+        })
+    }
+}

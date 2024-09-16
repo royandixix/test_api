@@ -1,5 +1,5 @@
-<?php 
-    Message::flash();
+<?php
+Message::flash();
 ?>
 <div class="container">
     <div class="header">
@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div>
-            <button onclick="location.href='<?php echo BASEURL . '/barang/insert'?>'" type="button" class="btn btn-primary">
+            <button onclick="location.href='<?php echo BASEURL . '/barang/insert' ?>'" type="button" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Tambah
             </button>
         </div>
@@ -34,7 +34,7 @@
                         <td><?php echo $row['harga_satuan'] ?></td>
                         <td><?php echo $row['expire_date'] ?></td>
                         <td>
-                            <a href="#"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="<?php echo BASEURL . '/barang/edit/' . $row['barang_id']; ?>"><i class="fas fa-edit"></i> Edit</a>
                         </td>
                     </tr>
                 <?php endforeach ?>
