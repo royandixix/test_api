@@ -9,6 +9,9 @@ class App
     private $parameter = [];
     private const DEFAULT_GET = 'GET';
     private const DEFAULT_POST = 'POST';
+    private const DEFAULT_PUT = 'PUT';
+    private const DEFAULT_DELETE = 'DELETE';
+    private const DEFAULT_PATCH = 'PATCH';
     private $handlers = [];
 
     public function setDefaultController($controller)
@@ -31,6 +34,21 @@ class App
         $this->setHandler(self::DEFAULT_POST, $uri, $callback);
     }
 
+    public function put($uri, $callback)
+    {
+        $this->setHandler(self::DEFAULT_PUT, $uri, $callback);
+    }
+
+    public function patch($uri, $callback)
+    {
+        $this->setHandler(self::DEFAULT_PATCH, $uri, $callback);
+    }
+
+    public function delete($uri, $callback)
+    {
+        $this->setHandler(self::DEFAULT_DELETE, $uri, $callback);
+    }
+
     private function setHandler(string $method, string $path, $handler)
     {
         $this->handlers[$method . $path] = [
@@ -48,23 +66,67 @@ class App
 
         foreach ($this->handlers as $handler) {
             $path = explode('/', ltrim(rtrim($handler['path'], '/'), '/'));
-            $kurl = (isset($url[0]) ? $url[0] : "") . (isset($url[1]) ? $url[1] : "");
-            $kpath = (isset($path[0]) ? $path[0] : "") . (isset($path[1]) ? $path[1] : "");
+            $new_path = [];
+            $new_url = [];
+            $param = [];
+            $paramURL = [];
+            
+            if (count($path) == count($url)) {
+                foreach ($path as $value) {
+                    if (!str_contains($value, ":")) {
+                        array_push($new_path, $value);
+                    } else {
+                        array_push($param, $value);
+                    }
+                }
+                
+                if (str_contains(implode("/", $url), implode("/", $new_path))) {
+                    for ($i = 0; $i < count($url); $i++) {
+                        if ($i < count($new_path)) {
+                            array_push($new_url, $url[$i]);
+                        } else {
+                            array_push($paramURL, $url[$i]);
+                        }
+                    }
 
+                    if (
+                        implode('/', $new_path) == implode('/', $new_url) &&
+                        count($param) == count($paramURL) &&
+                        $requestMethod == $handler['method']
+                    ) {
+                        if (isset($handler['handler'][0]) && file_exists(__DIR__ . '/../controllers/' . $handler['handler'][0] . '.php')) {
+                            require_once __DIR__ . '/../controllers/' . $handler['handler'][0] . '.php';
+                            $this->controllerFile = $handler['handler'][0];
+                            $this->controllerFile = new $this->controllerFile;
+                            $execute = 1;
 
-            if ($kurl !== "" && $kurl == $kpath && $requestMethod == $handler['method']) {
-                if (isset($handler['handler'][0]) && file_exists(__DIR__ . '/../controllers/' . $handler['handler'][0] . '.php')) {
-                    require_once __DIR__ . '/../controllers/' . $handler['handler'][0] . '.php';
-                    $this->controllerFile = $handler['handler'][0];
-                    $this->controllerFile = new $this->controllerFile;
-                    $execute = 1;
-
-                    if (isset($handler['handler'][1]) && method_exists($this->controllerFile, $handler['handler'][1])) {
-                        $this->controllerMethod = $handler['handler'][1];
-                        unset($url[1]);
+                            if (isset($handler['handler'][1]) && method_exists($this->controllerFile, $handler['handler'][1])) {
+                                $this->controllerMethod = $handler['handler'][1];
+                                unset($url[1]); 
+                            }
+                            $url=$paramURL;
+                        }
                     }
                 }
             }
+
+            // $path = explode('/', ltrim(rtrim($handler['path'], '/'), '/'));
+            // $kurl = (isset($url[0]) ? $url[0] : "") . (isset($url[1]) ? $url[1] : "");
+            // $kpath = (isset($path[0]) ? $path[0] : "") . (isset($path[1]) ? $path[1] : "");
+
+            // if ($kurl !== "" && $kurl == $kpath && $requestMethod == $handler['method']) {
+            //     if (isset($handler['handler'][0]) && file_exists(__DIR__ . '/../controllers/' . $handler['handler'][0] . '.php')) {
+            //         require_once __DIR__ . '/../controllers/' . $handler['handler'][0] . '.php';
+            //         $this->controllerFile = $handler['handler'][0];
+            //         $this->controllerFile = new $this->controllerFile;
+            //         $execute = 1;
+
+            //         if (isset($handler['handler'][1]) && method_exists($this->controllerFile, $handler['handler'][1])) {
+            //             $this->controllerMethod = $handler['handler'][1];
+            //             unset($url[1]); 
+            //         }
+            //     }
+            // }
         }
 
         if ($execute == 0) {
