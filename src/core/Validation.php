@@ -98,8 +98,10 @@
                 return true;
             }
 
-            return ctype_alnum($data[$field]);
+            // Memperbolehkan huruf, angka, dan spasi
+            return preg_match('/^[a-zA-Z0-9\s]+$/', $data[$field]) === 1;
         }
+
 
         public function is_secure(array $data, string $field): bool
         {

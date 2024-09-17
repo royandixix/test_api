@@ -27,6 +27,7 @@ class Sanitization
         ],
         'url' => FILTER_SANITIZE_URL,
     ];
+
     public function array_trim(array $items): array
     {
         return array_map(function ($item) {
@@ -35,7 +36,7 @@ class Sanitization
             } elseif (is_array($item)) {
                 return $this->array_trim($item);
             } else {
-                return $item; // Corrected to return the individual item
+                return $item;
             }
         }, $items);
     }
@@ -48,18 +49,15 @@ class Sanitization
         bool $trim = true
     ): array {
         if ($fields) {
+            $options = [];
             foreach ($fields as $key => $field) {
-                if ($field == "string") {
-                    $tempvar = strip_tags($inputs[$key]);
-                    $inputs[$key] = $tempvar;
-                }
+                $options[$key] = $filters[$field] ?? $default_filter;
             }
-            $options = array_map(fn($field) => $filters[trim($field)] ?? null, $fields);
-
             $data = filter_var_array($inputs, $options);
         } else {
             $data = filter_var_array($inputs, $default_filter);
         }
+        
         return $trim ? $this->array_trim($data) : $data;
-    } 
+    }
 }

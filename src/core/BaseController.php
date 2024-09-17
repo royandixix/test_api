@@ -1,8 +1,6 @@
 <?php
-class BaseController extends Filter
-{
-    public function view($view, $data = [])
-    {
+class BaseController extends Filter {
+    public function view($view, $data = []) {
         if (count($data)) {
             extract($data);
         }
@@ -10,22 +8,17 @@ class BaseController extends Filter
         require_once __DIR__ . '/../views/' . $view . '.php';
     }
 
-    public function redirect($url)
-    {
-        header('Location: ' . BASEURL . '/' . $url);
+    public function redirect($url) {
+        // header('Location: ' . BASEURL . '/' .$url);
+        header('location: ' .BASEURL  . '/' . $url);
         exit;
     }
 
-    public function model($model)
-    {
-        // Periksa path di sini
-        $file = __DIR__ . '/../models/' . $model . '.php';
-        if (file_exists($file)) {
-            require_once $file;
-            return new $model;
-        } else {
-            throw new Exception("Model file does not exist: " . $file);
-        }
+    public function model($model) {
+        require_once __DIR__ . '/../models/' . $model . '.php';
+       
+        return new $model;
     }
-    
 }
+
+?>

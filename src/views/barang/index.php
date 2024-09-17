@@ -1,4 +1,5 @@
 <?php
+
 Message::flash();
 ?>
 <div class="container">
