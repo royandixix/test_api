@@ -1,4 +1,5 @@
 <?php
+ use MyApp\Core\Message;
     // Mendapatkan data dari Message::getData()
     $data = Message::getData();
 

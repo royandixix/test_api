@@ -1,4 +1,8 @@
 <?php
+
+use MyApp\Core\BaseController;
+use MyApp\Core\Message;
+
 class BarangController extends BaseController
 {
     private $barangModel;
@@ -44,16 +48,11 @@ class BarangController extends BaseController
                 'alphanumeric' => 'Nama Barang harus berisi huruf dan angka',
                 'between' => 'Nama Barang harus di antara 3 dan 25 karakter',
             ],
-
-
             'harga_satuan' => [
                 'required' => 'Harga Satuan harus diisi!',
-                // 'numeric' => 'Harga Satuan harus berupa angka',
             ],
-
             'jumlah' => [
                 'integer' => 'Jumlah harus diisi!',
-                // 'integer' => 'Jumlah harus berupa angka',
             ],
         ];
 
@@ -65,16 +64,20 @@ class BarangController extends BaseController
             $this->redirect('barang/insert');
         }
 
+        // Mengonversi harga_satuan untuk memastikan format yang benar
+        $inputs['harga_satuan'] = str_replace(',', '.', $inputs['harga_satuan']);
+
         if ($inputs['kadaluarsa'] == "") {
             $inputs['kadaluarsa'] = "0000-00-00";
         }
 
         $proc = $this->barangModel->insert($inputs);
         if ($proc) {
-            Message::setFlash('succsess', 'Berhasil !', 'Barang berhasil di tambahkan,');
+            Message::setFlash('success', 'Berhasil!', 'Barang berhasil ditambahkan.');
             $this->redirect('barang');
         }
     }
+
 
     public function edit($id)
     {
@@ -127,18 +130,17 @@ class BarangController extends BaseController
         }
 
         if ($inputs['kadaluarsa'] == "") {
-            $inputs['kadaluarsa'] = "0000-00-00";   
+            $inputs['kadaluarsa'] = "0000-00-00";
         }
 
-        if($inputs['mode'] ==    'update') {
+        if ($inputs['mode'] ==    'update') {
             $proc = $this->barangModel->update($inputs);
-            if($proc){
+            if ($proc) {
                 Message::setFlash('sucsess', 'Berhasil !', 'Barang berhasil di Ubah');
                 $this->redirect('barang');
-            }else {
+            } else {
                 $proc = $this->barangModel->delete($inputs['id']);
             }
-        } 
-        
+        }
     }
 }

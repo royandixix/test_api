@@ -1,5 +1,6 @@
 <?php
 
+namespace MyApp\Core;
 
 class DotEnv
 {
@@ -41,5 +42,3 @@ class DotEnv
         }
     }
 }
-
-?>

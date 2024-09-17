@@ -1,5 +1,7 @@
 <?php
 
+namespace MyApp\Core;
+
 class Sanitization
 {
     const FILTERS = [
@@ -57,7 +59,7 @@ class Sanitization
         } else {
             $data = filter_var_array($inputs, $default_filter);
         }
-        
+
         return $trim ? $this->array_trim($data) : $data;
     }
 }

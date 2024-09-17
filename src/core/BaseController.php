@@ -1,6 +1,12 @@
 <?php
-class BaseController extends Filter {
-    public function view($view, $data = []) {
+
+namespace MyApp\Core;
+use MyApp\Core\Filter;
+
+class BaseController extends Filter
+{
+    public function view($view, $data = [])
+    {
         if (count($data)) {
             extract($data);
         }
@@ -8,17 +14,17 @@ class BaseController extends Filter {
         require_once __DIR__ . '/../views/' . $view . '.php';
     }
 
-    public function redirect($url) {
+    public function redirect($url)
+    {
         // header('Location: ' . BASEURL . '/' .$url);
-        header('location: ' .BASEURL  . '/' . $url);
+        header('location: ' . BASEURL  . '/' . $url);
         exit;
     }
 
-    public function model($model) {
+    public function model($model)
+    {
         require_once __DIR__ . '/../models/' . $model . '.php';
-       
+
         return new $model;
     }
 }
-
-?>

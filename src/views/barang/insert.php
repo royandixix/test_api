@@ -1,4 +1,7 @@
     <?php
+
+    use MyApp\Core\Message;
+
     $data = Message::getData();
     $namaBarang = "";
     $jumlah = "";
@@ -42,9 +45,10 @@
                         <label for="harga_satuan">Harga Satuan</label>
                     </div>
                     <div class="col-75">
-                        <input type="number" id="harga_satuan" name="harga_satuan" value="<?php echo $harga; ?>">
+                        <input type="number" id="harga_satuan" name="harga_satuan" value="<?php echo htmlspecialchars($harga); ?>" step="0.01">
                     </div>
                 </div>
+
 
                 <div class="row">
                     <div class="col-25">

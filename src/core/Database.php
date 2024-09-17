@@ -1,4 +1,10 @@
 <?php
+
+namespace MyApp\Core;
+
+use PDO;
+use PDOException;
+
 class Database
 {
     private $conn;
@@ -121,5 +127,4 @@ class Database
         $query = $query . $whereColumn;
         return $this->qry($query, $columnValue);
     }
-    
 }

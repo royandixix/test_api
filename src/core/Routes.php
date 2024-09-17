@@ -1,7 +1,11 @@
-<?php 
+<?php
 
-class Routes {
-    public function run() {
+namespace MyApp\Core;
+
+class Routes
+{
+    public function run()
+    {
         $router = new App();
 
         // Set default controller dan method
@@ -20,9 +24,8 @@ class Routes {
 
         // Definisikan rute GET untuk 'kategori'
         $router->get('/kategori', ['KategoriController', 'index']);
-        
+
         // Jalankan router
         $router->run();
     }
 }
-?>
