@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
 </head>
 
 <body>
@@ -32,4 +32,17 @@
                 </li>
             </ul>
         </div>
-        <div class="right">
+        <div class="right"> -->
+
+
+
+<?php
+header('access-control-allow-origin: * ');
+// Mengizinkan semua domain (wildcard `*`) untuk mengakses resource dari server ini.
+header('content-type: application/json');
+// Menetapkan tipe konten dari response menjadi JSON.
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH');
+// Mengizinkan metode HTTP yang dapat digunakan untuk berinteraksi dengan server (GET, POST, PUT, DELETE, PATCH).
+header('Access-Control-Allow-Headers: content-type, Authorization, access-control-allow-headers');
+// Mengizinkan header yang digunakan oleh klien untuk mengirimkan permintaan, seperti `content-type` dan `Authorization`.
+?>

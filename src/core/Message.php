@@ -9,7 +9,7 @@ class Message
         $_SESSION['flash'] = [
             'icon' => $icon,
             'title' => $title,
-            'text' => $text,
+            'text' => $text, 
             'data' => $data,
         ];
     }
