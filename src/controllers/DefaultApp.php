@@ -4,15 +4,6 @@ use MyApp\Core\BaseController;
 
 class DefaultApp extends BaseController
 {
-    // public function index() {
-    //     $data = [
-    //         "title"=> "Home",
-    //     ];
-    //     $this->view("template/header", $data);
-    //     $this->view('home/index', $data);
-    //     $this->view('template/footer');
-    // }
-
     // API
     public function index()
     {
@@ -22,8 +13,8 @@ class DefaultApp extends BaseController
             "message" => "Halaman tidak ditemukan",
             "data" => null
         ];
-        $this->view("template/header");
-        header('HTTP/1.0 404 Not Found'); 
+        header('HTTP/1.0 404 Not Found');
+        header('Content-Type: application/json');
         echo json_encode($data);
     }
 }
