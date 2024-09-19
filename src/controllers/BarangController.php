@@ -51,7 +51,6 @@ class BarangController extends BaseController
         echo json_encode($response);
     }
 
-
     public function insert()
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -80,19 +79,13 @@ class BarangController extends BaseController
 
         if ($errors) {
             $errorMessages = implode(' ', $errors);
-            Message::setFlash('error', 'Gagal!', $errorMessages, $inputs);
-            $this->redirect('barang/insert');
-        }
-
-        if ($errors) {
             $data = [
                 'status' => '400',
                 'error' => '400',
-                'message' => $errors,
+                'message' => $errorMessages,
                 'data' => $inputs
             ];
-            $this->view('template/header');
-            header('HTTP/1.0 404 Bad Request');
+            header('HTTP/1.0 400 Bad Request');
             echo json_encode($data);
             exit();
         } else {
@@ -101,19 +94,21 @@ class BarangController extends BaseController
                 $data = [
                     'status' => '201',
                     'error' => null,
-                    'message' => "Data di tambahkan" . $proc->rowCount() . "baris",
+                    'message' => "Data di tambahkan" . $proc->rowCount() . " baris",
                     'data' => $inputs
                 ];
-                $this->view('template/header');
-                header('HTTP/1.0 201 OK');
+                header('HTTP/1.0 201 Created');
                 echo json_encode($data);
             } else {
                 $data = [
                     'status' => '500',
                     'error' => '500',
-                    'message' => ''
+                    'message' => 'Gagal menambahkan data'
                 ];
+                header('HTTP/1.0 500 Internal Server Error');
+                echo json_encode($data);
             }
+            exit();
         }
     }
 
@@ -148,7 +143,6 @@ class BarangController extends BaseController
             $this->redirect('barang/insert');
         }
 
-        // Mengonversi harga_satuan untuk memastikan format yang benar
         $inputs['harga_satuan'] = str_replace(',', '.', $inputs['harga_satuan']);
 
         if ($inputs['kadaluarsa'] == "") {
@@ -161,7 +155,6 @@ class BarangController extends BaseController
             $this->redirect('barang');
         }
     }
-
 
     public function edit($id = null)
     {
@@ -191,22 +184,15 @@ class BarangController extends BaseController
 
         if ($errors) {
             $errorMessages = implode(' ', $errors);
-            Message::setFlash('error', 'Gagal!', $errorMessages, $inputs);
-            $this->redirect('barang/insert');
-        }
-
-        if ($errors) {
             $data = [
                 'status' => '400',
                 'error' => '400',
-                'message' => $errors,
+                'message' => $errorMessages,
                 'data' => $inputs
             ];
-            $this->view('template/header');
-            header('HTTP/1.0 404 Bad Request');
+            header('HTTP/1.0 400 Bad Request');
             echo json_encode($data);
             exit();
-        } else {
         }
     }
 
@@ -227,16 +213,11 @@ class BarangController extends BaseController
                 'alphanumeric' => 'Nama Barang harus berisi huruf dan angka',
                 'between' => 'Nama Barang harus di antara 3 dan 25 karakter',
             ],
-
-
             'harga_satuan' => [
                 'required' => 'Harga Satuan harus diisi!',
-                // 'numeric' => 'Harga Satuan harus berupa angka',
             ],
-
             'jumlah' => [
                 'integer' => 'Jumlah harus diisi!',
-                // 'integer' => 'Jumlah harus berupa angka',
             ],
         ];
 
@@ -245,28 +226,28 @@ class BarangController extends BaseController
         if ($errors) {
             $errorMessages = implode(' ', $errors);
             Message::setFlash('error', 'Gagal!', $errorMessages, $inputs);
-            // $this->redirect('barang/edit/.$inputs');
-            $this->redirect('barang/edit' . $inputs['id']);
+            $this->redirect('barang/edit/' . $inputs['id']);
         }
 
         if ($inputs['kadaluarsa'] == "") {
             $inputs['kadaluarsa'] = "0000-00-00";
         }
 
-        if ($inputs['mode'] ==    'update') {
+        if ($inputs['mode'] === 'update') {
             $proc = $this->barangModel->update($inputs);
             if ($proc) {
-                Message::setFlash('success', 'Berhasil !', ', Barang berhasil di ubah');
+                Message::setFlash('success', 'Berhasil!', 'Barang berhasil diubah.');
                 $this->redirect('barang');
             } else {
                 $proc = $this->barangModel->delete($inputs['id']);
                 if ($proc) {
-                    Message::setFlash('success', ' Berhasil', 'Barang berhasil di hapus');
+                    Message::setFlash('success', 'Berhasil', 'Barang berhasil dihapus.');
                     $this->redirect('barang');
                 }
             }
         }
     }
+
     public function delete($id = null) {
         if ($id === null) {  
             $data = [
@@ -293,5 +274,4 @@ class BarangController extends BaseController
             exit();
         }
     }
-    
 }

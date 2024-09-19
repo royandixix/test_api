@@ -19,6 +19,8 @@ class Routes
         $router->post('/barang', ['BarangController', 'insert']); // Rute untuk menambahkan data barang baru menggunakan metode POST.
         $router->delete('/barang/(:id)', ['BarangController', 'delete']); // Rute untuk menghapus data barang tertentu berdasarkan ID menggunakan metode DELETE.
 
+        $router->post('/register', ['AutentikasiController', 'register']);
+        $router->post('/login', ['AutentikasiController', 'login']);
         // Definisikan rute GET untuk 'kategori'
         $router->get('/kategori', ['KategoriController', 'index']); // Rute untuk menampilkan data kategori pada URL /kategori.
 

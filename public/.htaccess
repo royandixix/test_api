@@ -7,3 +7,5 @@ Options -Indexes
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^([\s\S]*)$ index.php?$1 [L]
 </IfModule>
+
+SetEnvif Authorization "(.*)" HTTP_AUTHORIZATION=$1

@@ -2,6 +2,8 @@
 
 namespace MyApp\Core;
 
+use MyApp\Models\uniqueModel;
+
 class Validation
 {
     const DEFAULT_VALIDATION_ERRORS = [
@@ -119,6 +121,9 @@ class Validation
     {
         // Implement the unique check here (e.g., query the database)
         // As an example, we'll return true as a placeholder
-        return true;
+        $uniqueModel = new uniqueModel();
+        $stmt = $uniqueModel->check($table, $column, $data[$field]);
+        return $stmt->fetchColumn() === false;
     }
 }
+ 

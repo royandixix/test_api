@@ -3,6 +3,9 @@
 namespace MyApp\Config;
 
 use MyApp\Core\DotEnv;
+use MyApp\Config\App;
+
+
 
 class Config
 {
@@ -10,7 +13,7 @@ class Config
     {
         // Path to .env file
         $dotenv = new DotEnv(__DIR__ . '../../.env');
-        $dotenv->load();
+        $dotenv->load();        
 
         // Define constants
         define('BASEURL', getenv('BASE_URL'));
